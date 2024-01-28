@@ -1,0 +1,33 @@
+[package]
+name = "ssl_port_forward"
+version = "0.0.1"
+edition = "2021"
+author = "davidwang2006@aliyun.com"
+description = "http_tunnel for port forwarding"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.0.12", features = ["derive","env"] }
+tokio = { version = "1.21.2", features = ["full"] }
+bytes = "1.2.1"
+# futures = "0.3.24"
+lazy_static = "1.4.0"
+rand = "0.8.5"
+chrono = "0.4.22"
+env_logger = "0.9.1"
+log = "0.4.17"
+# rustls = "0.20.6"
+tokio-rustls = {version="0.23.4", features=["default","dangerous_configuration"]}
+webpki-roots = "0.22.5"
+rustls-pemfile = "1.0.1"
+trust-dns-resolver = "0.22.0"
+
+[profile.release]
+# strip 可明显减少生成二进制文件的大小，尤其是在Linux环境下
+strip = true  # Automatically strip symbols from the binary.
+opt-level = "z"  # Optimize for size.
+
+# add lines to ~/.cargo/config.toml to remove path prefix
+# [build]
+# rustflags = ['--remap-path-prefix', 'C:\Users\david\workspace\rust-learning=.\']
